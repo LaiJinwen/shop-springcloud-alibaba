@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  mysql8:
+    image: mysql:8.0.40-debian
+    container_name: mysql8
+    privileged: true
+    restart: unless-stopped
+    ports:
+      - 13306:3306
+    volumes:
+      - /run/desktop/mnt/host/E:/middle-ware/docker-volume/mysql8/:/etc/mysql
+      - /run/desktop/mnt/host/E:/middle-ware/docker-volume/mysql8/logs/:/logs
+      - /run/desktop/mnt/host/E:/middle-ware/docker-volume/mysql8/data/:/var/lib/mysql
+      - /run/desktop/mnt/host/E:/middle-ware/docker-volume/mysql8/localtime/:/etc/localtime
+    environment:
+      MYSQL_ROOT_PASSWORD: Db85962335
+    network_mode: mysql8_default

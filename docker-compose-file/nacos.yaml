@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  nacos-server:
+    image: nacos/nacos-server:v2.4.3-slim
+    container_name: nacos-server
+    privileged: true
+    restart: on-failure  # 设置重启策略为启动失败后重试
+    ports:
+      - 8848:8848
+    environment:
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=host.docker.internal
+      - MYSQL_SERVICE_PORT=13306
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=Db85962335
+      - NACOS_APPLICATION_PORT=8848
+    deploy:
+      resources:
+        limits:
+          memory: 1g
