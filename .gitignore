@@ -1,8 +1,8 @@
-/shop-bean/target/*
-/shop-utils/target/*
-/shop-user/target/*
-/shop-order/target/*
-/shop-product/target/*
+/shop-bean/target/.*
+/shop-utils/target/.*
+/shop-user/target/.*
+/shop-order/target/.*
+/shop-product/target/.*
 /shop-user/target/maven-archiver/pom.properties
 /shop-user/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 /shop-user/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
