@@ -1,0 +1,59 @@
+<configuration>
+
+    <!-- Console Appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- Encoder responsible for the log message format -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+
+        <!-- Spring Framework internal logs in grey -->
+        <filter class="ch.qos.logback.classic.filter.LambdaFilter">
+            <evaluator>
+                <expression>loggerName.contains("org.springframework")</expression>
+            </evaluator>
+            <onMatch>DENY</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+
+        <!-- Program info logs in green -->
+        <filter class="ch.qos.logback.classic.filter.LambdaFilter">
+            <evaluator>
+                <expression>level == ch.qos.logback.classic.Level.INFO</expression>
+            </evaluator>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+
+        <!-- Program error logs in red -->
+        <filter class="ch.qos.logback.classic.filter.LambdaFilter">
+            <evaluator>
+                <expression>level == ch.qos.logback.classic.Level.ERROR</expression>
+            </evaluator>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- Logger for Spring Framework -->
+    <logger name="org.springframework" level="WARN" />
+
+    <!-- Logger for your application -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <!-- Color configuration for console output -->
+    <appender name="COLOR-PATTERN" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %highlight(%-5level) %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="your.package.name" level="INFO">
+        <appender-ref ref="COLOR-PATTERN" />
+    </logger>
+
+</configuration>

@@ -11,24 +11,27 @@ import io.binghe.shop.order.mapper.OrderMapper;
 import io.binghe.shop.order.service.OrderService;
 import io.binghe.shop.utils.constans.HttpCode;
 import io.binghe.shop.utils.resp.Result;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 
-/**
- * @author binghe
- * @version 1.0.0
- * @description
- */
-@Service
 @Slf4j
-public class OrderServiceImpl implements OrderService {
+@Service("aaaa")
+public class OrderServiceV2Impl implements OrderService {
 
+    private String userServer = "";
+    private String productServer = "";
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
@@ -36,6 +39,21 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @PostConstruct
+    public void init() {
+        this.userServer = this.getServiceUrl("server-user");
+        this.productServer = this.getServiceUrl("server-product");
+    }
+
+    private String getServiceUrl(String serviceName){
+        List<ServiceInstance> instLst = discoveryClient.getInstances(serviceName);
+        if(instLst.isEmpty()){
+            return serviceName + " not start";
+        } else {
+            ServiceInstance serviceInstance = Optional.ofNullable(instLst.get(0)).orElse(null);
+            return serviceInstance.getHost() + ":" + serviceInstance.getPort();
+        }
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -44,11 +62,11 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("参数异常: " + JSONObject.toJSONString(orderParams));
         }
 
-        User user = restTemplate.getForObject("http://localhost:8060/user/get/" + orderParams.getUserId(), User.class);
+        User user = restTemplate.getForObject("http://"+this.userServer+"/user/get/" + orderParams.getUserId(), User.class);
         if (user == null){
             throw new RuntimeException("未获取到用户信息: " + JSONObject.toJSONString(orderParams));
         }
-        Product product = restTemplate.getForObject("http://localhost:8070/product/get/" + orderParams.getProductId(), Product.class);
+        Product product = restTemplate.getForObject("http://"+this.productServer+"/product/get/" + orderParams.getProductId(), Product.class);
         if (product == null){
             throw new RuntimeException("未获取到商品信息: " + JSONObject.toJSONString(orderParams));
         }
@@ -77,5 +95,4 @@ public class OrderServiceImpl implements OrderService {
         }
         log.info("库存扣减成功");
     }
-
 }

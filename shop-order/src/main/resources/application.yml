@@ -2,15 +2,22 @@ server:
   port: 8080
   servlet:
     context-path: /order
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
 spring:
   application:
     name: server-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://127.0.0.1:8848
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/binghe?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-    username: root
+    url: jdbc:mysql://localhost:13306/binghe?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: steven_lai
     password: Db85962335
-    platform: mysql
     type: com.alibaba.druid.pool.DruidDataSource
     # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大
@@ -34,12 +41,6 @@ spring:
     # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
     filters: stat
 
-  http:
-    encoding:
-      enabled: true
-      charset: UTF-8
-      force: true
-
   mybatis-plus:
     global-config:
       db-config:
@@ -52,3 +53,6 @@ spring:
     mapper-locations: classpath:/mapper/*.xml
     configuration:
       jdbc-type-for-null: 'null'
+  sql:
+    init:
+      platform: mysql
