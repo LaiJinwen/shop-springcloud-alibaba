@@ -14,6 +14,7 @@
         <module>shop-order</module>
         <module>shop-product</module>
         <module>shop-user</module>
+        <module>shop-gateway</module>
     </modules>
 
     <parent>

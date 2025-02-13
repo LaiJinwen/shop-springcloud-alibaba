@@ -6,26 +6,26 @@ import org.apache.commons.lang3.StringUtils;
 public class OrderParams {
     private Integer count;
     private String price;
-    private String userId;
-    private String productId;
+    private Long userId;
+    private Long productId;
 
     public boolean isEmpty(){
-        return StringUtils.isAllEmpty(String.valueOf(this.count), this.productId, this.price, this.userId);
+        return StringUtils.isAllEmpty(String.valueOf(this.count), String.valueOf(this.productId), this.price, String.valueOf(this.userId));
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public String getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 

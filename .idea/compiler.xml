@@ -7,17 +7,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="shop-product" />
-        <module name="shop-user" />
+        <module name="shop-gateway" />
         <module name="shop-utils" />
         <module name="shop-bean" />
         <module name="shop-order" />
+        <module name="shop-product" />
+        <module name="shop-user" />
+        <module name="1shop-gateway" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="shop-gateway" target="22" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="1shop-gateway" options="-parameters" />
       <module name="shop-bean" options="-parameters" />
+      <module name="shop-gateway" options="-parameters" />
       <module name="shop-order" options="-parameters" />
       <module name="shop-product" options="-parameters" />
       <module name="shop-springcloud-alibaba" options="" />

@@ -1,8 +1,15 @@
+/.idea/*
 /shop-bean/target/.*
 /shop-utils/target/.*
 /shop-user/target/.*
 /shop-order/target/.*
 /shop-product/target/.*
+/shop-bean/target/*
+/shop-utils/target/*
+/shop-user/target/*
+/shop-order/target/*
+/shop-product/target/*
+/shop-gateway/target/*
 /shop-user/target/maven-archiver/pom.properties
 /shop-user/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 /shop-user/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
@@ -14,10 +21,6 @@
 /shop-utils/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 /shop-utils/target/shop-utils-1.0.0-SNAPSHOT.jar
 /shop-utils/target/shop-utils-1.0.1-SNAPSHOT.jar
-/shop-utils/target/maven-archiver/pom.properties
-/shop-utils/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
-/shop-utils/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
-/shop-utils/target/shop-utils-1.0.0-SNAPSHOT.jar
 /shop-bean/target/maven-archiver/pom.properties
 /shop-bean/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 /shop-bean/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst

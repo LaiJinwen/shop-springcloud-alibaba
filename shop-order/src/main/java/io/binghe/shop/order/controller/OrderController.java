@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import io.binghe.shop.order.OrderParams;
 import io.binghe.shop.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController {
 
-    @Qualifier("aaaa")
     @Autowired
+    @Qualifier("orderServiceV5")
     private OrderService orderService;
 
     @GetMapping(value = "/submit_order")
@@ -26,4 +24,11 @@ public class OrderController {
         orderService.saveOrder(orderParams);
         return "success";
     }
+
+    @GetMapping(value = "/test_sentinel")
+    public String testSentinel() {
+        log.info("testSentinel:{}");
+        return "success";
+    }
+
 }
